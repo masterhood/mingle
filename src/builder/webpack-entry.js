@@ -5,17 +5,16 @@ let entry;
 // We'll start by filtering through all the JS compilation requests from the user, and building up the main entry object
 // for Webpack.
 function addScripts() {
-    if (Config.js.length) {
-        Config.js.forEach(js => {
-            entry.addFromOutput(
-                js.entry.map(file => file.path()),
-                js.output,
-                js.entry[0]
-            );
-        });
-    } else {
-        entry.addDefault();
-    }
+
+	! Config.js.length
+		 ? entry.addDefault()
+		 : Config.js.forEach(js => {
+             entry.addFromOutput(
+                 js.entry.map(file => file.path()),
+                 js.output,
+                 js.entry[0]
+             );
+         });
 }
 
 

@@ -31,7 +31,6 @@ class WebpackConfig {
         return this.webpackConfig;
     }
 
-
     /**
      * Build the entry object.
      */
@@ -54,7 +53,6 @@ class WebpackConfig {
         return this;
     }
 
-
     /**
      * Build the output object.
      */
@@ -71,7 +69,6 @@ class WebpackConfig {
         return this;
     }
 
-
     /**
      * Build the rules array.
      */
@@ -83,7 +80,6 @@ class WebpackConfig {
 
         return this;
     }
-
 
     /**
      * Build the plugins array.
@@ -121,7 +117,6 @@ class WebpackConfig {
 
         return this;
     }
-
 
     /**
      * Merge the user's custom Webpack configuration.
