@@ -9,7 +9,7 @@ class ManifestPlugin {
             let stats = curCompiler.getStats().toJson();
 
             // Handle the creation of the mix-manifest.json file.
-            Mix.manifest.transform(stats).refresh();
+            Mingle.manifest.transform(stats).refresh();
 
             callback();
         });

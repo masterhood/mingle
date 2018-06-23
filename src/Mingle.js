@@ -1,17 +1,20 @@
 let Paths = require('./Paths');
 let Manifest = require('./Manifest');
 let Dispatcher = require('./Dispatcher');
+let Components = require('./components/Components');
 let isFunction = require('lodash').isFunction;
 
-class Mix {
+class Mingle {
     /**
      * Create a new instance.
      */
     constructor() {
-        this.paths = new Paths;
-        this.manifest = new Manifest;
-        this.dispatcher = new Dispatcher;
+        this.paths = new Paths();
+        this.manifest = new Manifest();
+        this.dispatcher = new Dispatcher();
         this.tasks = [];
+        this.bundlingJavaScript = false;
+        this.components = new Components();
     }
 
     /**
@@ -20,23 +23,24 @@ class Mix {
      * @param {string} tool
      */
     isUsing(tool) {
-        return !! Config[tool];
+        return !!Config[tool];
     }
 
     /**
-     * Determine if Mix is executing in a production environment.
+     * Determine if Mingle is executing in a production environment.
      */
     inProduction() {
         return Config.production;
     }
 
     /**
-     * Determine if Mix should watch files for changes.
+     * Determine if Mingle should watch files for changes.
      */
     isWatching() {
-        return process.argv.includes('--watch') || process.argv.includes('--hot');
+        return (
+            process.argv.includes('--watch') || process.argv.includes('--hot')
+        );
     }
-
 
     /**
      * Determine if polling is used for file watching
@@ -46,20 +50,20 @@ class Mix {
     }
 
     /**
-     * Determine if Mix sees a particular tool or framework.
+     * Determine if Mingle sees a particular tool or framework.
      *
      * @param {string} tool
      */
     sees(tool) {
-        if (tool === 'olivia') {
-            return File.exists('./art');
+        if (tool === 'laravel') {
+            return File.exists('./artisan');
         }
 
         return false;
     }
 
     /**
-     * Determine if Mix should activate hot reloading.
+     * Determine if Mingle should activate hot reloading.
      */
     shouldHotReload() {
         new File(path.join(Config.publicPath, 'hot')).delete();
@@ -110,4 +114,4 @@ class Mix {
     }
 }
 
-module.exports = Mix;
+module.exports = Mingle;

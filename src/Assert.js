@@ -1,10 +1,10 @@
 let assert = require('assert');
-let exec = require('child_process').execSync;
+let Dependencies = require('./Dependencies');
 let argv = require('yargs').argv;
 
-class Verify {
+class Assert {
     /**
-     * Verify that the call the mix.js() is valid.
+     * Assert that the call the mix.js() is valid.
      *
      * @param {*} entry
      * @param {*} output
@@ -21,9 +21,8 @@ class Verify {
         );
     }
 
-
     /**
-     * Verify that the calls to mix.sass() and mix.less() are valid.
+     * Assert that the calls to mix.sass() and mix.less() are valid.
      *
      * @param {string} type
      * @param {string} src
@@ -41,9 +40,8 @@ class Verify {
         );
     }
 
-
     /**
-     * Verify that calls to mix.combine() are valid.
+     * Assert that calls to mix.combine() are valid.
      *
      * @param {string} src
      * @param {File}   output
@@ -54,7 +52,6 @@ class Verify {
             'mix.combine() requires a full output file path as the second argument.'
         );
     }
-
 
     /**
      * Assert that the given file exists.
@@ -69,47 +66,16 @@ class Verify {
     }
 
     /**
-     * Verify that the necessary dependency is available.
+     * Assert that the necessary dependencies are available.
      *
-     * @param {string}  name
-     * @param {array}   dependencies
+     * @param {Array}  list
      * @param {Boolean} abortOnComplete
      */
-    static dependency(name, dependencies, abortOnComplete = false) {
+    static dependencies(dependencies, abortOnComplete = false) {
         if (argv['$0'].includes('ava')) return;
 
-        try {
-            require.resolve(name);
-        } catch (e) {
-            console.log(
-                'Additional dependencies must be installed. ' +
-                'This will only take a moment.'
-            );
-
-            installDependencies(dependencies.join(' '));
-
-            if (abortOnComplete) {
-                console.log('Finished. Please run Mix again.');
-
-               process.exit();
-            }
-        }
+        new Dependencies(dependencies).install(abortOnComplete);
     }
 }
 
-/**
- * Install the given dependencies using npm or yarn.
- *
- * @param {array} dependencies
- */
-let installDependencies = dependencies => {
-    let command = `npm install ${dependencies} --save-dev`;
-
-    if (File.exists('yarn.lock')) {
-        command = `yarn add ${dependencies} --dev`;
-    }
-
-    exec(command);
-};
-
-module.exports = Verify;
+module.exports = Assert;

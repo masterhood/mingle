@@ -10,7 +10,7 @@ let expand = require('dotenv-expand');
 function MixDefinitionsPlugin(envPath) {
     expand(
         dotenv.config({
-            path: envPath || Mix.paths.root('.env')
+            path: envPath || Mingle.paths.root('.env')
         })
     );
 }

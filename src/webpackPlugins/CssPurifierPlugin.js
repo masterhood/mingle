@@ -7,10 +7,10 @@ class CssPurifierPlugin {
      */
     static build() {
         let twigFiles = glob.sync(
-            Mix.paths.root('resources/views/**/*.twig')
+            Mingle.paths.root('resources/views/**/*.twig')
         );
         let vueFiles = glob.sync(
-            Mix.paths.root('resources/assets/js/**/*.vue')
+            Mingle.paths.root('resources/assets/js/**/*.vue')
         );
 
         let paths = twigFiles.concat(vueFiles);
@@ -22,7 +22,7 @@ class CssPurifierPlugin {
         return new Purifier(
             Object.assign({}, Config.purifyCss, {
                 paths,
-                minimize: Mix.inProduction()
+                minimize: Mingle.inProduction()
             })
         );
     }

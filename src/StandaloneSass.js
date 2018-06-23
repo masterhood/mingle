@@ -17,9 +17,8 @@ class StandaloneSass {
         this.pluginOptions = pluginOptions;
         this.shouldWatch = process.argv.includes('--watch');
 
-        Mix.addAsset(this.output);
+        Mingle.addAsset(this.output);
     }
-
 
     /**
      * Run the node-sass compiler.
@@ -29,7 +28,6 @@ class StandaloneSass {
 
         if (this.shouldWatch) this.watch();
     }
-
 
     /**
      * Compile Sass.
@@ -51,7 +49,6 @@ class StandaloneSass {
         return this;
     }
 
-
     /**
      * Fetch the node-sass options.
      *
@@ -60,7 +57,7 @@ class StandaloneSass {
     options(watch) {
         let sassOptions = [
             '--precision=8',
-            '--output-style=' + (Mix.inProduction() ? 'compressed' : 'expanded')
+            '--output-style=' + (Mingle.inProduction() ? 'compressed' : 'expanded')
         ];
 
         if (watch) sassOptions.push('--watch');
@@ -68,20 +65,19 @@ class StandaloneSass {
         if (this.pluginOptions.includePaths) {
             this.pluginOptions.includePaths.forEach(path =>
                 sassOptions.push('--include-path=' + path)
-             );
+            );
         }
 
-        if(this.pluginOptions.importer) {
-            sassOptions.push('--importer ' + this.pluginOptions.importer)
+        if (this.pluginOptions.importer) {
+            sassOptions.push('--importer ' + this.pluginOptions.importer);
         }
 
-        if (Mix.isUsing('sourcemaps') && ! Mix.inProduction()) {
+        if (Mingle.isUsing('sourcemaps') && !Mingle.inProduction()) {
             sassOptions.push('--source-map-embed');
         }
 
         return sassOptions;
     }
-
 
     /**
      * Compile Sass, while registering a watcher.
@@ -89,7 +85,6 @@ class StandaloneSass {
     watch() {
         return this.compile(true);
     }
-
 
     /**
      * Register a callback for when output is available.
@@ -108,25 +103,23 @@ class StandaloneSass {
         });
     }
 
-
     /**
      * Handle successful compilation.
      *
      * @param {string} output
      */
     onSuccess(output) {
-        console.log("\n");
+        console.log('\n');
         console.log(output);
 
         if (Config.notifications.onSuccess) {
             notifier.notify({
-                title: 'Olivia Mingle',
+                title: 'Ofcold Mingle',
                 message: 'Sass Compilation Successful',
                 contentImage: 'node_modules/mingle/icons/inc.png'
             });
         }
     }
-
 
     /**
      * Handle failed compilation.
@@ -139,21 +132,21 @@ class StandaloneSass {
             ''
         );
 
-        console.log("\n");
+        console.log('\n');
         console.log('Sass Compilation Failed!');
         console.log();
         console.log(output);
 
-        if (Mix.isUsing('notifications')) {
+        if (Mingle.isUsing('notifications')) {
             notifier.notify({
-                title: 'Olivia Mingle',
+                title: 'Ofcold Mingle',
                 subtitle: 'Sass Compilation Failed',
                 message: JSON.parse(output).message,
                 contentImage: 'node_modules/mingle/icons/inc.png'
             });
         }
 
-        if (! this.shouldWatch) process.exit();
+        if (!this.shouldWatch) process.exit();
     }
 }
 
