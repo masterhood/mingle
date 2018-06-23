@@ -51,7 +51,9 @@ class CustomTasksPlugin {
      * @param {File} asset
      */
     minifyAssets(asset) {
-        let tasks = Mix.tasks.filter(task => task.constructor.name !== 'VersionFilesTask');
+		let tasks = Mix.tasks.filter(task => {
+            return task.constructor.name !== 'VersionFilesTask' && task.constructor.name !== 'CopyFilesTask';
+        });
 
         tasks.forEach(task => {
             task.assets.forEach(asset => {
