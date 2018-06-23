@@ -1,7 +1,7 @@
 let webpack = require('webpack');
 
 let webpackDefaultConfig = require('./webpack-default');
-let webpackEntry = require('./webpack-entry');
+let Entry = require('./Entry');
 let webpackRules = require('./webpack-rules');
 let webpackPlugins = require('./webpack-plugins');
 
@@ -26,7 +26,7 @@ class WebpackConfig {
             .buildResolving()
             .mergeCustomConfig();
 
-        Mix.dispatch('configReady', this.webpackConfig);
+        Mingle.dispatch('configReady', this.webpackConfig);
 
         return this.webpackConfig;
     }
@@ -35,20 +35,15 @@ class WebpackConfig {
      * Build the entry object.
      */
     buildEntry() {
-        let { entry, extractions } = webpackEntry();
+        let entry = new Entry();
 
-        this.webpackConfig.entry = entry;
-
-        // If we're extracting any vendor libraries, then we need to add the CommonChunksPlugin to strip out all relevant
-        // code into its own file.
-        if (extractions.length) {
-            this.webpackConfig.plugins.push(
-                new webpack.optimize.CommonsChunkPlugin({
-                    names: extractions,
-                    minChunks: Infinity
-                })
-            );
+        if (! Mingle.bundlingJavaScript) {
+            entry.addDefault();
         }
+
+        Mingle.dispatch('loading-entry', entry);
+
+        this.webpackConfig.entry = entry.get();
 
         return this;
     }
@@ -57,13 +52,25 @@ class WebpackConfig {
      * Build the output object.
      */
     buildOutput() {
-         let http = process.argv.includes('--https') ? 'https' : 'http';
+        let http = process.argv.includes('--https') ? 'https' : 'http';
+
+        if (Mingle.isUsing('hmr')) {
+            this.webpackConfig.devServer.host = Config.hmrOptions.host;
+            this.webpackConfig.devServer.port = Config.hmrOptions.port;
+        }
 
         this.webpackConfig.output = {
-            path: path.resolve(Mix.isUsing('hmr') ? '/' : Config.publicPath),
+            path: path.resolve(Mingle.isUsing('hmr') ? '/' : Config.publicPath),
             filename: '[name].js',
             chunkFilename: '[name].js',
-            publicPath: Mix.isUsing('hmr') ? (http + '://localhost:8080/') : ''
+            publicPath: Mingle.isUsing('hmr')
+                ? http +
+                  '://' +
+                  Config.hmrOptions.host +
+                  ':' +
+                  Config.hmrOptions.port +
+                  '/'
+                : '/'
         };
 
         return this;
@@ -73,10 +80,11 @@ class WebpackConfig {
      * Build the rules array.
      */
     buildRules() {
-        let { rules, extractPlugins } = webpackRules();
+        this.webpackConfig.module.rules = this.webpackConfig.module.rules.concat(
+            webpackRules()
+        );
 
-        this.webpackConfig.module.rules = this.webpackConfig.module.rules.concat(rules);
-        this.webpackConfig.plugins = this.webpackConfig.plugins.concat(extractPlugins);
+        Mingle.dispatch('loading-rules', this.webpackConfig.module.rules);
 
         return this;
     }
@@ -89,29 +97,20 @@ class WebpackConfig {
             webpackPlugins()
         );
 
+        Mingle.dispatch('loading-plugins', this.webpackConfig.plugins);
+
         return this;
     }
-
 
     /**
      * Build the resolve object.
      */
     buildResolving() {
-        let extensions = ['*', '.js', '.jsx', '.vue'];
-
-        let buildFile = 'vue/dist/vue.common.js';
-
-        if (Config.typeScript) {
-            extensions.push('.ts', '.tsx');
-
-            buildFile = 'vue/dist/vue.esm.js';
-        }
-
         this.webpackConfig.resolve = {
-            extensions,
+            extensions: ['*', '.js', '.jsx', '.vue'],
 
             alias: {
-                'vue$': buildFile
+                vue$: 'vue/dist/vue.common.js'
             }
         };
 
@@ -124,7 +123,8 @@ class WebpackConfig {
     mergeCustomConfig() {
         if (Config.webpackConfig) {
             this.webpackConfig = require('webpack-merge').smart(
-                this.webpackConfig, Config.webpackConfig
+                this.webpackConfig,
+                Config.webpackConfig
             );
         }
     }

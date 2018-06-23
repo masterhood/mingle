@@ -6,24 +6,23 @@ class CustomTasksPlugin {
      */
     apply(compiler) {
         compiler.plugin('done', stats => {
-            Mix.tasks.forEach(task => this.runTask(task, stats));
+            Mingle.tasks.forEach(task => this.runTask(task, stats));
 
-            if (Mix.isUsing('versioning')) {
+            if (Mingle.components.get('version')) {
                 this.applyVersioning();
             }
 
-            if (Mix.inProduction()) {
+            if (Mingle.inProduction()) {
                 this.minifyAssets();
             }
 
-            if (Mix.isWatching()) {
-                Mix.tasks.forEach(task => task.watch(Mix.isPolling()));
+            if (Mingle.isWatching()) {
+                Mingle.tasks.forEach(task => task.watch(Mingle.isPolling()));
             }
 
-            Mix.manifest.refresh();
+            Mingle.manifest.refresh();
         });
     }
-
 
     /**
      * Execute the task.
@@ -34,7 +33,7 @@ class CustomTasksPlugin {
         task.run();
 
         task.assets.forEach(asset => {
-            Mix.manifest.add(asset.pathFromPublic());
+            Mingle.manifest.add(asset.pathFromPublic());
 
             // Update the Webpack assets list for better terminal output.
             stats.compilation.assets[asset.pathFromPublic()] = {
@@ -44,14 +43,13 @@ class CustomTasksPlugin {
         });
     }
 
-
     /**
      * Minify the given asset file.
-     *
-     * @param {File} asset
      */
-    minifyAssets(asset) {
-        let tasks = Mix.tasks.filter(task => task.constructor.name !== 'VersionFilesTask');
+    minifyAssets() {
+        let tasks = Mingle.tasks.filter(task => {
+            return task.constructor.name !== 'VersionFilesTask' && task.constructor.name !== 'CopyFilesTask';
+        });
 
         tasks.forEach(task => {
             task.assets.forEach(asset => {
@@ -60,7 +58,7 @@ class CustomTasksPlugin {
                 } catch (e) {
                     console.log(
                         `Whoops! We had trouble minifying "${asset.relativePath()}". ` +
-                        `Perhaps you need to use mix.babel() instead?`
+                            `Perhaps you need to use mix.babel() instead?`
                     );
 
                     throw e;
@@ -69,14 +67,13 @@ class CustomTasksPlugin {
         });
     }
 
-
     /**
      * Version all files that are present in the manifest.
      */
     applyVersioning() {
-        let manifest = Object.keys(Mix.manifest.get());
+        let manifest = Object.keys(Mingle.manifest.get());
 
-        manifest.forEach(file => Mix.manifest.hash(file));
+        manifest.forEach(file => Mingle.manifest.hash(file));
     }
 }
 

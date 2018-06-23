@@ -12,14 +12,12 @@ class FileCollection {
         this.files = [].concat(files);
     }
 
-
     /**
      * Fetch the underlying files.
      */
     get() {
         return this.files;
     }
-
 
     /**
      * Merge all files in the collection into one.
@@ -40,7 +38,6 @@ class FileCollection {
         return new File(output.makeDirectories().path());
     }
 
-
     /**
      * Determine if we should add a Babel pass to the concatenated file.
      *
@@ -50,7 +47,6 @@ class FileCollection {
     shouldCompileWithBabel(wantsBabel, output) {
         return wantsBabel && output.extension() === '.js';
     }
-
 
     /**
      * Apply Babel to the given contents.
@@ -64,7 +60,6 @@ class FileCollection {
 
         return babel.transform(contents, babelConfig).code;
     }
-
 
     /**
      * Copy the src files to the given destination.
@@ -90,8 +85,10 @@ class FileCollection {
         if (src.contains('*')) {
             let files = glob.sync(src.path(), { nodir: true });
 
-            if (! files.length) {
-                console.log(`Notice: The ${src.path()} search produced no matches.`);
+            if (!files.length) {
+                console.log(
+                    `Notice: The ${src.path()} search produced no matches.`
+                );
             }
 
             return this.copyTo(destination, files);
