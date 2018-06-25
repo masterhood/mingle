@@ -49,14 +49,14 @@ class Vue {
                 scssLoader.push({
                     loader: 'sass-resources-loader',
                     options: {
-                        resources: Mingle.paths.root(Config.globalVueStyles)
+                        resources: Rally.paths.root(Config.globalVueStyles)
                     }
                 });
 
                 sassLoader.push({
                     loader: 'sass-resources-loader',
                     options: {
-                        resources: Mingle.paths.root(Config.globalVueStyles)
+                        resources: Rally.paths.root(Config.globalVueStyles)
                     }
                 });
             }
@@ -110,7 +110,7 @@ class Vue {
             return new ExtractTextPlugin(this.extractFilePath());
         }
 
-        let preprocessorName = Object.keys(Mingle.components.all())
+        let preprocessorName = Object.keys(Rally.components.all())
             .reverse()
             .find(componentName => {
                 return ['sass', 'less', 'stylus', 'postCss'].includes(
@@ -122,7 +122,7 @@ class Vue {
             return new ExtractTextPlugin(this.extractFilePath());
         }
 
-        return Mingle.components.get(preprocessorName).extractPlugins.slice(-1)[0];
+        return Rally.components.get(preprocessorName).extractPlugins.slice(-1)[0];
     }
 
     extractFilePath() {

@@ -1,4 +1,4 @@
-let mingle = require('../index');
+let rally = require('../index');
 let Assert = require('../Assert');
 let webpackMerge = require('webpack-merge');
 
@@ -47,7 +47,7 @@ class ComponentFactory {
 
         this.registerComponent(component);
 
-        Mingle.listen('init', () => {
+        Rally.listen('init', () => {
             if (!component.activated && !component.passive) {
                 return;
             }
@@ -56,22 +56,22 @@ class ComponentFactory {
             component.boot && component.boot();
             component.babelConfig && this.applyBabelConfig(component);
 
-            Mingle.listen('loading-entry', entry => {
+            Rally.listen('loading-entry', entry => {
                 if (component.webpackEntry) {
                     component.webpackEntry(entry);
                 }
             });
 
-            Mingle.listen('loading-rules', rules => {
+            Rally.listen('loading-rules', rules => {
                 component.webpackRules && this.applyRules(rules, component);
             });
 
-            Mingle.listen('loading-plugins', plugins => {
+            Rally.listen('loading-plugins', plugins => {
                 component.webpackPlugins &&
                     this.applyPlugins(plugins, component);
             });
 
-            Mingle.listen('configReady', config => {
+            Rally.listen('configReady', config => {
                 component.webpackConfig && component.webpackConfig(config);
             });
         });
@@ -90,8 +90,8 @@ class ComponentFactory {
                     : component.constructor.name.toLowerCase()
             )
             .forEach(name => {
-                mingle[name] = (...args) => {
-                    Mingle.components.record(name, component);
+                rally[name] = (...args) => {
+                    Rally.components.record(name, component);
 
                     component.caller = name;
 
@@ -99,19 +99,20 @@ class ComponentFactory {
 
                     component.activated = true;
 
-                    return mingle;
+                    return rally;
                 };
 
-                // If we're dealing with a passive component that doesn't need to be explicitly triggered by the user,
-                // we'll call it now.
+                // If we're dealing with a passive component that doesn't
+                // need to be explicitly triggered by the user, we'll
+                // call it now.
                 if (component.passive) {
-                    mingle[name]();
+                    rally[name]();
                 }
 
-                // Components can optionally write to the Mingle API directly.
-                if (component.mingle) {
-                    Object.keys(component.mingle()).forEach(name => {
-                        mingle[name] = component.mingle()[name];
+                // Components can optionally write to the Rally API directly.
+                if (component.rally) {
+                    Object.keys(component.rally()).forEach(name => {
+                        rally[name] = component.rally()[name];
                     });
                 }
             });

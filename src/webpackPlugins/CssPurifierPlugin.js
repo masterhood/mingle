@@ -6,14 +6,14 @@ class CssPurifierPlugin {
      * Build up the plugin.
      */
     static build() {
-        let twigFiles = glob.sync(
-            Mingle.paths.root('resources/views/**/*.twig')
+        let bladeFiles = glob.sync(
+            Rally.paths.root('resources/views/**/*.blade.php')
         );
         let vueFiles = glob.sync(
-            Mingle.paths.root('resources/assets/js/**/*.vue')
+            Rally.paths.root('resources/assets/js/**/*.vue')
         );
 
-        let paths = twigFiles.concat(vueFiles);
+        let paths = bladeFiles.concat(vueFiles);
 
         if (Config.purifyCss.paths) {
             paths = paths.concat(Config.purifyCss.paths);
@@ -22,7 +22,7 @@ class CssPurifierPlugin {
         return new Purifier(
             Object.assign({}, Config.purifyCss, {
                 paths,
-                minimize: Mingle.inProduction()
+                minimize: Rally.inProduction()
             })
         );
     }

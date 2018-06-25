@@ -9,7 +9,7 @@ class React extends JavaScript {
     }
 
     /**
-     * Babel config to be merged with Mingle's defaults.
+     * Babel config to be merged with Rally's defaults.
      */
     babelConfig() {
         return {

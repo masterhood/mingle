@@ -24,8 +24,8 @@ class CopyFilesTask extends Task {
     onChange(updatedFile) {
         let destination = this.data.to;
 
-        // If we're copying a src directory recursively, we have to calculate the correct destination path, based on the
-        // src directory tree.
+        // If we're copying a src directory recursively, we have to calculate
+        // the correct destination path, based on the src directory tree.
         if (
             !Array.isArray(this.data.from) &&
             new File(this.data.from).isDirectory()

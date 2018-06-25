@@ -26,7 +26,7 @@ class WebpackConfig {
             .buildResolving()
             .mergeCustomConfig();
 
-        Mingle.dispatch('configReady', this.webpackConfig);
+        Rally.dispatch('configReady', this.webpackConfig);
 
         return this.webpackConfig;
     }
@@ -37,11 +37,11 @@ class WebpackConfig {
     buildEntry() {
         let entry = new Entry();
 
-        if (! Mingle.bundlingJavaScript) {
+        if (! Rally.bundlingJavaScript) {
             entry.addDefault();
         }
 
-        Mingle.dispatch('loading-entry', entry);
+        Rally.dispatch('loading-entry', entry);
 
         this.webpackConfig.entry = entry.get();
 
@@ -54,16 +54,16 @@ class WebpackConfig {
     buildOutput() {
         let http = process.argv.includes('--https') ? 'https' : 'http';
 
-        if (Mingle.isUsing('hmr')) {
+        if (Rally.isUsing('hmr')) {
             this.webpackConfig.devServer.host = Config.hmrOptions.host;
             this.webpackConfig.devServer.port = Config.hmrOptions.port;
         }
 
         this.webpackConfig.output = {
-            path: path.resolve(Mingle.isUsing('hmr') ? '/' : Config.publicPath),
+            path: path.resolve(Rally.isUsing('hmr') ? '/' : Config.publicPath),
             filename: '[name].js',
             chunkFilename: '[name].js',
-            publicPath: Mingle.isUsing('hmr')
+            publicPath: Rally.isUsing('hmr')
                 ? http +
                   '://' +
                   Config.hmrOptions.host +
@@ -84,7 +84,7 @@ class WebpackConfig {
             webpackRules()
         );
 
-        Mingle.dispatch('loading-rules', this.webpackConfig.module.rules);
+        Rally.dispatch('loading-rules', this.webpackConfig.module.rules);
 
         return this;
     }
@@ -97,7 +97,7 @@ class WebpackConfig {
             webpackPlugins()
         );
 
-        Mingle.dispatch('loading-plugins', this.webpackConfig.plugins);
+        Rally.dispatch('loading-plugins', this.webpackConfig.plugins);
 
         return this;
     }

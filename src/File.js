@@ -83,7 +83,7 @@ class File {
      * Get the relative path to the file, from the project root.
      */
     relativePath() {
-        return path.relative(Mingle.paths.root(), this.path());
+        return path.relative(Rally.paths.root(), this.path());
     }
 
     /**
@@ -118,7 +118,7 @@ class File {
 
         let extra = this.filePath.startsWith(publicPath) ? publicPath : '';
 
-        return this.path().replace(Mingle.paths.root(extra), '');
+        return this.path().replace(Rally.paths.root(extra), '');
     }
 
     /**

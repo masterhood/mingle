@@ -11,7 +11,7 @@ class VersionFilesTask extends Task {
         this.assets = this.data.files.map(file => {
             file = new File(file);
 
-            Mingle.manifest.hash(file.pathFromPublic());
+            Rally.manifest.hash(file.pathFromPublic());
 
             return file;
         });
@@ -23,7 +23,7 @@ class VersionFilesTask extends Task {
      * @param {string} updatedFile
      */
     onChange(updatedFile) {
-        Mingle.manifest.hash(new File(updatedFile).pathFromPublic()).refresh();
+        Rally.manifest.hash(new File(updatedFile).pathFromPublic()).refresh();
     }
 }
 

@@ -1,14 +1,29 @@
-// As our first step, we'll pull in the user's webpack.mingle.js file. Based on what the user requests in that file, a generic
-// config object will be constructed for us.
-require('../src/index');
+/**
+ * As our first step, we'll pull in the user's webpack.rally.js
+ * file. Based on what the user requests in that file,
+ * a generic config object will be constructed for us.
+ */
+let rally = require('../src/index');
 
-require(Mingle.paths.mingle());
+let ComponentFactory = require('../src/components/ComponentFactory');
 
-// Just in case the user needs to hook into this point in the build process, we'll make an announcement.
-Mingle.dispatch('init', Mingle);
+new ComponentFactory().installAll();
 
-// Now that we know which build tasks are required by the user, we can dynamically create a configuration object for
-// Webpack. And that's all there is to it. Simple!
+require(Rally.paths.rally());
+
+/**
+ * Just in case the user needs to hook into this point
+ * in the build process, we'll make an announcement.
+ */
+
+Rally.dispatch('init', Rally);
+
+/**
+ * Now that we know which build tasks are required by the
+ * user, we can dynamically create a configuration object
+ * for Webpack. And that's all there is to it. Simple!
+ */
+
 let WebpackConfig = require('../src/builder/WebpackConfig');
 
 module.exports = new WebpackConfig().build();

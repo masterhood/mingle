@@ -56,7 +56,7 @@ module.exports = function() {
         },
 
         /**
-         * Determine if Mingle should remove unused selectors from your CSS bundle.
+         * Determine if Rally should remove unused selectors from your CSS bundle.
          * You may provide a boolean, or object for the Purify plugin.
          *
          * https://github.com/webpack-contrib/purifycss-webpack#options
@@ -139,7 +139,7 @@ module.exports = function() {
         babel: function() {
             let options = {};
 
-            tap(Mingle.paths.root('.babelrc'), babelrc => {
+            tap(Rally.paths.root('.babelrc'), babelrc => {
                 if (File.exists(babelrc)) {
                     options = JSON.parse(File.find(babelrc).read());
                 }
@@ -232,22 +232,22 @@ module.exports = function() {
         cleanCss: {},
 
         /**
-         * Custom Webpack-specific configuration to merge/override Mingle's.
+         * Custom Webpack-specific configuration to merge/override Rally's.
          *
          * @type {Object}
          */
         webpackConfig: {},
 
         /**
-         * Custom Babel configuration to be merged with Mingle's defaults.
+         * Custom Babel configuration to be merged with Rally's defaults.
          *
          * @type {Object}
          */
         babelConfig: {},
 
         /**
-         * Determine if Mingle should ask the friendly errors plugin to clear the console before outputting the results or
-         * not.
+         * Determine if Rally should ask the friendly errors plugin to
+         * clear the console before outputting the results or not.
          *
          * https://github.com/geowarin/friendly-errors-webpack-plugin#options
          *

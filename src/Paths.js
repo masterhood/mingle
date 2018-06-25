@@ -5,14 +5,15 @@ class Paths {
      * Create a new Paths instance.
      */
     constructor() {
-
-		this.rootPath = argv['$0'].includes('ava')
-			 ? path.resolve(__dirname, '../')
-			 : path.resolve(__dirname, '../../../');
+        if (argv['$0'].includes('ava')) {
+            this.rootPath = path.resolve(__dirname, '../');
+        } else {
+            this.rootPath = path.resolve(__dirname, '../../../');
+        }
     }
 
     /**
-     * Set the root path to resolve webpack.mingle.js.
+     * Set the root path to resolve webpack.rally.js.
      *
      * @param {string} path
      */
@@ -23,11 +24,11 @@ class Paths {
     }
 
     /**
-     * Determine the path to the user's webpack.mingle.js file.
+     * Determine the path to the user's webpack.rally.js file.
      */
-    mingle() {
+    rally() {
         return this.root(
-            argv.env && argv.env.minglefile ? argv.env.minglefile : 'webpack.mingle'
+            argv.env && argv.env.rallyfile ? argv.env.rallyfile : 'webpack.rally'
         );
     }
 

@@ -17,7 +17,7 @@ class StandaloneSass {
         this.pluginOptions = pluginOptions;
         this.shouldWatch = process.argv.includes('--watch');
 
-        Mingle.addAsset(this.output);
+        Rally.addAsset(this.output);
     }
 
     /**
@@ -57,7 +57,7 @@ class StandaloneSass {
     options(watch) {
         let sassOptions = [
             '--precision=8',
-            '--output-style=' + (Mingle.inProduction() ? 'compressed' : 'expanded')
+            '--output-style=' + (Rally.inProduction() ? 'compressed' : 'expanded')
         ];
 
         if (watch) sassOptions.push('--watch');
@@ -72,7 +72,7 @@ class StandaloneSass {
             sassOptions.push('--importer ' + this.pluginOptions.importer);
         }
 
-        if (Mingle.isUsing('sourcemaps') && !Mingle.inProduction()) {
+        if (Rally.isUsing('sourcemaps') && !Rally.inProduction()) {
             sassOptions.push('--source-map-embed');
         }
 
@@ -114,9 +114,9 @@ class StandaloneSass {
 
         if (Config.notifications.onSuccess) {
             notifier.notify({
-                title: 'Ofcold Mingle',
+                title: 'Ofcold Rally',
                 message: 'Sass Compilation Successful',
-                contentImage: 'node_modules/mingle/icons/inc.png'
+                contentImage: 'node_modules/ofcold-rally/icons/ofcold.png'
             });
         }
     }
@@ -137,12 +137,12 @@ class StandaloneSass {
         console.log();
         console.log(output);
 
-        if (Mingle.isUsing('notifications')) {
+        if (Rally.isUsing('notifications')) {
             notifier.notify({
-                title: 'Ofcold Mingle',
+                title: 'Ofcold Rally',
                 subtitle: 'Sass Compilation Failed',
                 message: JSON.parse(output).message,
-                contentImage: 'node_modules/mingle/icons/inc.png'
+                contentImage: 'node_modules/ofcold-rally/icons/ofcold.png'
             });
         }
 

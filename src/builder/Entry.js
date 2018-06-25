@@ -25,7 +25,7 @@ class Entry {
      * Add a key key-val pair to the structure.
      *
      * @param {string} key
-     * @param {mixed}  val
+     * @param {rallyed}  val
      */
     add(key, val) {
         this.structure[key] = (this.structure[key] || []).concat(val);
@@ -36,7 +36,7 @@ class Entry {
     /**
      * Add a new key-val pair, based on a given output path.
      *
-     * @param {mixed}  val
+     * @param {rallyed}  val
      * @param {Object} output
      * @param {Object} fallback
      */
@@ -52,9 +52,9 @@ class Entry {
      * @param {Object} extraction
      */
     addExtraction(extraction) {
-        if (!Mingle.bundlingJavaScript && !extraction.output) {
+        if (!Rally.bundlingJavaScript && !extraction.output) {
             throw new Error(
-                'Please provide an output path as the second argument to mingle.extract().'
+                'Please provide an output path as the second argument to rally.extract().'
             );
         }
 
@@ -75,7 +75,7 @@ class Entry {
      */
     addDefault() {
         this.add(
-            'mingle',
+            'rally',
             new File(path.resolve(__dirname, 'mock-entry.js')).path()
         );
     }

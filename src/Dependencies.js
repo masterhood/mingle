@@ -1,5 +1,5 @@
 let process = require('child_process');
-let File = require('./File');
+let File = require('../src/File');
 
 class Dependencies {
     constructor(dependencies) {
@@ -35,7 +35,7 @@ class Dependencies {
             console.log(
                 typeof abortOnComplete === 'string'
                     ? abortOnComplete
-                    : 'Finished. Please run Mingle again.'
+                    : 'Finished. Please run Rally again.'
             );
 
             process.exit();
