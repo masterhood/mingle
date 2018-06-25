@@ -24,13 +24,13 @@ global.Mingle = new (require('./Mingle'))();
 /**
  * If we're working in a Ofcold app, we'll explicitly set the default public path, as a convenience.
  */
-if (Mingle.sees('laravel')) {
+if (Mingle.sees('ofcold')) {
     Config.publicPath = 'public';
 }
 
 /**
  * If the user activates hot reloading, with the --hot flag, we'll record it as a file, so that Ofcold can detect it and
- * update its mix() url paths.
+ * update its mingle() url paths.
  */
 
 Mingle.listen('init', () => {
@@ -56,5 +56,5 @@ let Api = require('./Api');
 let api = new Api();
 
 module.exports = api;
-module.exports.mix = api; // Deprecated.
+module.exports.mingle = api; // Deprecated.
 module.exports.config = Config;

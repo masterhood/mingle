@@ -1,8 +1,8 @@
-// As our first step, we'll pull in the user's webpack.mix.js file. Based on what the user requests in that file, a generic
+// As our first step, we'll pull in the user's webpack.mingle.js file. Based on what the user requests in that file, a generic
 // config object will be constructed for us.
 require('../src/index');
 
-require(Mingle.paths.mix());
+require(Mingle.paths.mingle());
 
 // Just in case the user needs to hook into this point in the build process, we'll make an announcement.
 Mingle.dispatch('init', Mingle);

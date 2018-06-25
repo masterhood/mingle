@@ -1,4 +1,4 @@
-let mix = require('../index');
+let mingle = require('../index');
 let Assert = require('../Assert');
 let webpackMerge = require('webpack-merge');
 
@@ -90,7 +90,7 @@ class ComponentFactory {
                     : component.constructor.name.toLowerCase()
             )
             .forEach(name => {
-                mix[name] = (...args) => {
+                mingle[name] = (...args) => {
                     Mingle.components.record(name, component);
 
                     component.caller = name;
@@ -99,19 +99,19 @@ class ComponentFactory {
 
                     component.activated = true;
 
-                    return mix;
+                    return mingle;
                 };
 
                 // If we're dealing with a passive component that doesn't need to be explicitly triggered by the user,
                 // we'll call it now.
                 if (component.passive) {
-                    mix[name]();
+                    mingle[name]();
                 }
 
                 // Components can optionally write to the Mingle API directly.
-                if (component.mix) {
-                    Object.keys(component.mix()).forEach(name => {
-                        mix[name] = component.mix()[name];
+                if (component.mingle) {
+                    Object.keys(component.mingle()).forEach(name => {
+                        mingle[name] = component.mingle()[name];
                     });
                 }
             });

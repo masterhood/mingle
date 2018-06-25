@@ -4,7 +4,7 @@ let argv = require('yargs').argv;
 
 class Assert {
     /**
-     * Assert that the call the mix.js() is valid.
+     * Assert that the call the mingle.js() is valid.
      *
      * @param {*} entry
      * @param {*} output
@@ -12,17 +12,17 @@ class Assert {
     static js(entry, output) {
         assert(
             typeof entry === 'string' || Array.isArray(entry),
-            'mix.js() is missing required parameter 1: entry'
+            'mingle.js() is missing required parameter 1: entry'
         );
 
         assert(
             typeof output === 'string',
-            'mix.js() is missing required parameter 2: output'
+            'mingle.js() is missing required parameter 2: output'
         );
     }
 
     /**
-     * Assert that the calls to mix.sass() and mix.less() are valid.
+     * Assert that the calls to mingle.sass() and mingle.less() are valid.
      *
      * @param {string} type
      * @param {string} src
@@ -31,17 +31,17 @@ class Assert {
     static preprocessor(type, src, output) {
         assert(
             typeof src === 'string',
-            `mix.${type}() is missing required parameter 1: src`
+            `mingle.${type}() is missing required parameter 1: src`
         );
 
         assert(
             typeof output === 'string',
-            `mix.${type}() is missing required parameter 2: output`
+            `mingle.${type}() is missing required parameter 2: output`
         );
     }
 
     /**
-     * Assert that calls to mix.combine() are valid.
+     * Assert that calls to mingle.combine() are valid.
      *
      * @param {string} src
      * @param {File}   output
@@ -49,7 +49,7 @@ class Assert {
     static combine(src, output) {
         assert(
             output.isFile(),
-            'mix.combine() requires a full output file path as the second argument.'
+            'mingle.combine() requires a full output file path as the second argument.'
         );
     }
 
