@@ -30,7 +30,7 @@ if (Mingle.sees('ofcold')) {
 
 /**
  * If the user activates hot reloading, with the --hot flag, we'll record it as a file, so that Ofcold can detect it and
- * update its mix() url paths.
+ * update its mingle() url paths.
  */
 
 Mingle.listen('init', () => {

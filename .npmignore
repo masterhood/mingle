@@ -4,6 +4,6 @@ test/
 .nyc_output
 .idea
 coverage
-mix.sublime-project
-mix.sublime-workspace
+mingle.sublime-project
+mingle.sublime-workspace
 notes.md

@@ -9,7 +9,7 @@ class Manifest {
      *
      * @param {string} name
      */
-    constructor(name = 'mix-manifest.json') {
+    constructor(name = 'mingle-manifest.json') {
         this.manifest = {};
         this.name = name;
     }
@@ -76,7 +76,7 @@ class Manifest {
     }
 
     /**
-     * Refresh the mix-manifest.js file.
+     * Refresh the mingle-manifest.js file.
      */
     refresh() {
         File.find(this.path())
@@ -106,9 +106,9 @@ class Manifest {
     flattenAssets(stats) {
         let assets = Object.assign({}, stats.assetsByChunkName);
 
-        // If there's a temporary mix.js chunk, we can safely remove it.
-        if (assets.mix) {
-            assets.mix = without(assets.mix, 'mix.js');
+        // If there's a temporary mingle.js chunk, we can safely remove it.
+        if (assets.mingle) {
+            assets.mingle = without(assets.mingle, 'mingle.js');
         }
 
         return flatten(assets);

@@ -55,8 +55,8 @@ class Mingle {
      * @param {string} tool
      */
     sees(tool) {
-        if (tool === 'laravel') {
-            return File.exists('./artisan');
+        if (tool === 'ofcold') {
+            return File.exists('./art');
         }
 
         return false;

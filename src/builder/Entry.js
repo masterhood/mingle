@@ -54,7 +54,7 @@ class Entry {
     addExtraction(extraction) {
         if (!Mingle.bundlingJavaScript && !extraction.output) {
             throw new Error(
-                'Please provide an output path as the second argument to mix.extract().'
+                'Please provide an output path as the second argument to mingle.extract().'
             );
         }
 
@@ -75,7 +75,7 @@ class Entry {
      */
     addDefault() {
         this.add(
-            'mix',
+            'mingle',
             new File(path.resolve(__dirname, 'mock-entry.js')).path()
         );
     }

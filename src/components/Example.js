@@ -1,11 +1,11 @@
 /**
  * This file represents an example component interface for Mingle. All new components can be "inserted" into Mingle, like so:
  *
- * // webpack.mix.js
+ * // webpack.mingle.js
  *
- * mix.extend('foo', new Example());
+ * mingle.extend('foo', new Example());
  *
- * mix.foo();
+ * mingle.foo();
  */
 
 class Example {
@@ -13,7 +13,7 @@ class Example {
      * The optional name to be used when called by Mingle.
      * Defaults to the class name, lowercased.
      *
-     * Ex: mix.example();
+     * Ex: mingle.example();
      *
      * @return {String|Array}
      */
@@ -40,7 +40,7 @@ class Example {
      * will be passed to this method.
      *
      * Ex: register(src, output) {}
-     * Ex: mix.yourPlugin('src/path', 'output/path');
+     * Ex: mingle.yourPlugin('src/path', 'output/path');
      *
      * @param  {*} ...params
      * @return {void}
@@ -53,7 +53,7 @@ class Example {
 
     /**
      * Boot the component. This method is triggered after the
-     * user's webpack.mix.js file has executed.
+     * user's webpack.mingle.js file has executed.
      */
     boot() {
         // Example:
@@ -117,4 +117,4 @@ class Example {
 }
 
 // Usage:
-// mix.extend('example', new Example());
+// mingle.extend('example', new Example());
