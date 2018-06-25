@@ -1,6 +1,6 @@
 let webpack = require('webpack');
 let FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-let MixDefinitionsPlugin = require('../webpackPlugins/MixDefinitionsPlugin');
+let MingleDefinitionsPlugin = require('../webpackPlugins/MingleDefinitionsPlugin');
 let BuildCallbackPlugin = require('../webpackPlugins/BuildCallbackPlugin');
 let CustomTasksPlugin = require('../webpackPlugins/CustomTasksPlugin');
 let ManifestPlugin = require('../webpackPlugins/ManifestPlugin');
@@ -26,9 +26,9 @@ module.exports = function() {
         plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
     }
 
-    // Activate support for Mix_ .env definitions.
+    // Activate support for Mingle_ .env definitions.
     plugins.push(
-        MixDefinitionsPlugin.build({
+        MingleDefinitionsPlugin.build({
             NODE_ENV: Mingle.inProduction()
                 ? 'production'
                 : process.env.NODE_ENV || 'development'

@@ -7,7 +7,7 @@ let expand = require('dotenv-expand');
  *
  * @param {string} envPath
  */
-function MixDefinitionsPlugin(envPath) {
+function MingleDefinitionsPlugin(envPath) {
     expand(
         dotenv.config({
             path: envPath || Mingle.paths.root('.env')
@@ -20,9 +20,9 @@ function MixDefinitionsPlugin(envPath) {
  *
  * @param {Object|null} merge
  */
-MixDefinitionsPlugin.build = function(merge = {}) {
+MingleDefinitionsPlugin.build = function(merge = {}) {
     return new webpack.DefinePlugin(
-        new MixDefinitionsPlugin().getDefinitions(merge)
+        new MingleDefinitionsPlugin().getDefinitions(merge)
     );
 };
 
@@ -31,7 +31,7 @@ MixDefinitionsPlugin.build = function(merge = {}) {
  *
  * @param {object} merge
  */
-MixDefinitionsPlugin.prototype.getDefinitions = function(merge) {
+MingleDefinitionsPlugin.prototype.getDefinitions = function(merge) {
     let regex = /^MIX_/i;
 
     // Filter out env vars that don't begin with MIX_.
@@ -56,4 +56,4 @@ MixDefinitionsPlugin.prototype.getDefinitions = function(merge) {
     };
 };
 
-module.exports = MixDefinitionsPlugin;
+module.exports = MingleDefinitionsPlugin;
