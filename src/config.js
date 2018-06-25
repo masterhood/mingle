@@ -246,8 +246,7 @@ module.exports = function() {
         babelConfig: {},
 
         /**
-         * Determine if Rally should ask the friendly errors plugin to
-         * clear the console before outputting the results or not.
+         * Determine if Rally should ask the friendly errors plugin to clear the console before outputting the results or not.
          *
          * https://github.com/geowarin/friendly-errors-webpack-plugin#options
          *

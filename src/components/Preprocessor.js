@@ -155,8 +155,7 @@ class Preprocessor {
     }
 
     /**
-     * Generate a full output path, using a fallback
-     * file name, if a directory is provided.
+     * Generate a full output path, using a fallback file name, if a directory is provided.
      *
      * @param {Object} output
      * @param {Object} fallbackName
