@@ -6,14 +6,14 @@ class CssPurifierPlugin {
      * Build up the plugin.
      */
     static build() {
-        let bladeFiles = glob.sync(
-            Rally.paths.root('resources/views/**/*.blade.php')
+        let twigFiles = glob.sync(
+            Rally.paths.root('resources/views/**/*.twig')
         );
         let vueFiles = glob.sync(
             Rally.paths.root('resources/assets/js/**/*.vue')
         );
 
-        let paths = bladeFiles.concat(vueFiles);
+        let paths = twigFiles.concat(vueFiles);
 
         if (Config.purifyCss.paths) {
             paths = paths.concat(Config.purifyCss.paths);

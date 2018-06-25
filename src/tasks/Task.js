@@ -25,8 +25,7 @@ class Task {
             .watch(files, { usePolling, persistent: true })
             .on('change', this.onChange.bind(this));
 
-        // Workaround for issue with atomic writes.
-        // See https://github.com/paulmillr/chokidar/issues/591
+        // Workaround for issue with atomic writes. See https://github.com/paulmillr/chokidar/issues/591
         if (!usePolling) {
             watcher.on('raw', (event, path, { watchedPath }) => {
                 if (event === 'rename') {
