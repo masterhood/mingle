@@ -56,5 +56,4 @@ let Api = require('./Api');
 let api = new Api();
 
 module.exports = api;
-module.exports.mingle = api; // Deprecated.
 module.exports.config = Config;

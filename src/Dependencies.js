@@ -1,5 +1,5 @@
 let process = require('child_process');
-let File = require('../src/File');
+let File = require('./File');
 
 class Dependencies {
     constructor(dependencies) {
