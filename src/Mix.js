@@ -4,7 +4,7 @@ let Dispatcher = require('./Dispatcher');
 let Components = require('./components/Components');
 let isFunction = require('lodash').isFunction;
 
-class Mingle {
+class Rally {
     /**
      * Create a new instance.
      */
@@ -27,14 +27,14 @@ class Mingle {
     }
 
     /**
-     * Determine if Mingle is executing in a production environment.
+     * Determine if Rally is executing in a production environment.
      */
     inProduction() {
         return Config.production;
     }
 
     /**
-     * Determine if Mingle should watch files for changes.
+     * Determine if Rally should watch files for changes.
      */
     isWatching() {
         return (
@@ -50,20 +50,20 @@ class Mingle {
     }
 
     /**
-     * Determine if Mingle sees a particular tool or framework.
+     * Determine if Rally sees a particular tool or framework.
      *
      * @param {string} tool
      */
     sees(tool) {
         if (tool === 'ofcold') {
-            return File.exists('./art');
+            return File.exists('./artisan');
         }
 
         return false;
     }
 
     /**
-     * Determine if Mingle should activate hot reloading.
+     * Determine if Rally should activate hot reloading.
      */
     shouldHotReload() {
         new File(path.join(Config.publicPath, 'hot')).delete();
@@ -114,4 +114,4 @@ class Mingle {
     }
 }
 
-module.exports = Mingle;
+module.exports = Rally;

@@ -7,10 +7,10 @@ let expand = require('dotenv-expand');
  *
  * @param {string} envPath
  */
-function MingleDefinitionsPlugin(envPath) {
+function RallyDefinitionsPlugin(envPath) {
     expand(
         dotenv.config({
-            path: envPath || Mingle.paths.root('.env')
+            path: envPath || Rally.paths.root('.env')
         })
     );
 }
@@ -20,21 +20,21 @@ function MingleDefinitionsPlugin(envPath) {
  *
  * @param {Object|null} merge
  */
-MingleDefinitionsPlugin.build = function(merge = {}) {
+RallyDefinitionsPlugin.build = function(merge = {}) {
     return new webpack.DefinePlugin(
-        new MingleDefinitionsPlugin().getDefinitions(merge)
+        new RallyDefinitionsPlugin().getDefinitions(merge)
     );
 };
 
 /**
- * Build all MIX_ definitions for Webpack's DefinePlugin.
+ * Build all RALLY_ definitions for Webpack's DefinePlugin.
  *
  * @param {object} merge
  */
-MingleDefinitionsPlugin.prototype.getDefinitions = function(merge) {
-    let regex = /^MIX_/i;
+RallyDefinitionsPlugin.prototype.getDefinitions = function(merge) {
+    let regex = /^RALLY_/i;
 
-    // Filter out env vars that don't begin with MIX_.
+    // Filter out env vars that don't begin with RALLY_.
     let env = Object.keys(process.env)
         .filter(key => regex.test(key))
         .reduce((value, key) => {
@@ -56,4 +56,4 @@ MingleDefinitionsPlugin.prototype.getDefinitions = function(merge) {
     };
 };
 
-module.exports = MingleDefinitionsPlugin;
+module.exports = RallyDefinitionsPlugin;

@@ -1,19 +1,21 @@
 /**
- * This file represents an example component interface for Mingle. All new components can be "inserted" into Mingle, like so:
+ * This file represents an example component interface
+ * for Rally. All new components can be "inserted" into
+ * Rally, like so:
  *
- * // webpack.mingle.js
+ * // webpack.rally.js
  *
- * mingle.extend('foo', new Example());
+ * rally.extend('foo', new Example());
  *
- * mingle.foo();
+ * rally.foo();
  */
 
 class Example {
     /**
-     * The optional name to be used when called by Mingle.
+     * The optional name to be used when called by Rally.
      * Defaults to the class name, lowercased.
      *
-     * Ex: mingle.example();
+     * Ex: rally.example();
      *
      * @return {String|Array}
      */
@@ -24,7 +26,7 @@ class Example {
     }
 
     /**
-     * All dependencies that should be installed by Mingle.
+     * All dependencies that should be installed by Rally.
      *
      * @return {Array}
      */
@@ -40,7 +42,7 @@ class Example {
      * will be passed to this method.
      *
      * Ex: register(src, output) {}
-     * Ex: mingle.yourPlugin('src/path', 'output/path');
+     * Ex: rally.yourPlugin('src/path', 'output/path');
      *
      * @param  {*} ...params
      * @return {void}
@@ -53,7 +55,7 @@ class Example {
 
     /**
      * Boot the component. This method is triggered after the
-     * user's webpack.mingle.js file has executed.
+     * user's webpack.rally.js file has executed.
      */
     boot() {
         // Example:
@@ -61,7 +63,7 @@ class Example {
     }
 
     /**
-     * Append to the master Mingle webpack entry object.
+     * Append to the master Rally webpack entry object.
      *
      * @param  {Entry} entry
      * @return {void}
@@ -106,7 +108,7 @@ class Example {
     }
 
     /**
-     * Babel config to be merged with Mingle's defaults.
+     * Babel config to be merged with Rally's defaults.
      *
      * @return {Object}
      */
@@ -117,4 +119,4 @@ class Example {
 }
 
 // Usage:
-// mingle.extend('example', new Example());
+// rally.extend('example', new Example());

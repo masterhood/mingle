@@ -31,7 +31,7 @@ class Css extends AutomaticComponent {
      * @param {string} preprocessor
      */
     excludePathsFor(preprocessor) {
-        let exclusions = Mingle.components.get(preprocessor);
+        let exclusions = Rally.components.get(preprocessor);
 
         return exclusions
             ? exclusions.details.map(preprocessor => preprocessor.src.path())

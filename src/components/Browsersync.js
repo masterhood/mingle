@@ -44,6 +44,7 @@ class Browsersync {
                 port: 3000,
                 proxy: 'app.test',
                 files: [
+                    'app/**/*.php',
                     'resources/views/**/*.php',
                     'public/js/**/*.js',
                     'public/css/**/*.css'

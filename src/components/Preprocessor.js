@@ -34,7 +34,7 @@ class Preprocessor {
                         loader: 'css-loader',
                         options: {
                             url: Config.processCssUrls,
-                            sourceMap: Mingle.isUsing('sourcemaps'),
+                            sourceMap: Rally.isUsing('sourcemaps'),
                             importLoaders: 1
                         }
                     },
@@ -46,7 +46,7 @@ class Preprocessor {
                                 preprocessor.type === 'sass' &&
                                 Config.processCssUrls
                                     ? true
-                                    : Mingle.isUsing('sourcemaps'),
+                                    : Rally.isUsing('sourcemaps'),
                             ident: 'postcss',
                             plugins: (function() {
                                 let plugins = Config.postCss;
@@ -80,7 +80,7 @@ class Preprocessor {
                         loader: 'resolve-url-loader',
                         options: {
                             sourceMap: true,
-                            root: Mingle.paths.root('node_modules')
+                            root: Rally.paths.root('node_modules')
                         }
                     });
                 }
@@ -93,7 +93,7 @@ class Preprocessor {
                                 preprocessor.type === 'sass' &&
                                 Config.processCssUrls
                                     ? true
-                                    : Mingle.isUsing('sourcemaps')
+                                    : Rally.isUsing('sourcemaps')
                         })
                     });
                 }
@@ -148,14 +148,15 @@ class Preprocessor {
         });
 
         if (type === 'fastSass') {
-            Mingle.addAsset(output);
+            Rally.addAsset(output);
         }
 
         return this;
     }
 
     /**
-     * Generate a full output path, using a fallback file name, if a directory is provided.
+     * Generate a full output path, using a fallback
+     * file name, if a directory is provided.
      *
      * @param {Object} output
      * @param {Object} fallbackName

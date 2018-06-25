@@ -15,7 +15,7 @@ class Copy {
      * @param {string} to
      */
     register(from, to) {
-        Mingle.addTask(new CopyFilesTask({ from, to: new File(to) }));
+        Rally.addTask(new CopyFilesTask({ from, to: new File(to) }));
     }
 }
 

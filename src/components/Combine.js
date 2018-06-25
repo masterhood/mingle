@@ -47,7 +47,7 @@ class Combine {
 
         let task = new ConcatFilesTask({ src, output, babel });
 
-        Mingle.addTask(task);
+        Rally.addTask(task);
     }
 }
 

@@ -25,7 +25,7 @@ class Version {
             })
         );
 
-        Mingle.addTask(new VersionFilesTask({ files }));
+        Rally.addTask(new VersionFilesTask({ files }));
     }
 
     /**
@@ -36,7 +36,7 @@ class Version {
 
         return [
             new webpack[
-                Mingle.inProduction()
+                Rally.inProduction()
                     ? 'HashedModuleIdsPlugin'
                     : 'NamedModulesPlugin'
             ](),

@@ -1,6 +1,6 @@
 module.exports = function() {
     return {
-        context: Mingle.paths.root(),
+        context: Rally.paths.root(),
 
         entry: {},
 
@@ -11,8 +11,8 @@ module.exports = function() {
         plugins: [],
 
         stats: {
-            hash: true,
-            version: true,
+            hash: false,
+            version: false,
             timings: false,
             children: false,
             errorDetails: false,

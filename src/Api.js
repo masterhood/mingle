@@ -10,7 +10,7 @@ class Api {
      * @param {string}  type
      */
     sourceMaps(productionToo = true, type = 'eval-source-map') {
-        if (Mingle.inProduction()) {
+        if (Rally.inProduction()) {
             type = productionToo ? 'source-map' : false;
         }
 
@@ -58,7 +58,7 @@ class Api {
     }
 
     /**
-     * Merge custom Babel config with Mingle's default.
+     * Merge custom Babel config with Rally's default.
      *
      * @param {object} config
      */
@@ -68,7 +68,7 @@ class Api {
         return this;
     }
 
-    /* Set Mingle-specific options.
+    /* Set Rally-specific options.
      *
      * @param {object} options
      */
@@ -84,7 +84,7 @@ class Api {
      * @param {Function} callback
      */
     then(callback) {
-        Mingle.listen('build', callback);
+        Rally.listen('build', callback);
 
         return this;
     }
@@ -93,7 +93,7 @@ class Api {
      * Helper for determining a production environment.
      */
     inProduction() {
-        return Mingle.inProduction();
+        return Rally.inProduction();
     }
 }
 

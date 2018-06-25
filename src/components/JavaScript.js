@@ -43,7 +43,7 @@ class JavaScript {
 
         this.toCompile.push({ entry, output });
 
-        Mingle.bundlingJavaScript = true;
+        Rally.bundlingJavaScript = true;
     }
 
     /**
