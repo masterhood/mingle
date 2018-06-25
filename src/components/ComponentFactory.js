@@ -102,9 +102,8 @@ class ComponentFactory {
                     return mix;
                 };
 
-                // If we're dealing with a passive component that doesn't
-                // need to be explicitly triggered by the user, we'll
-                // call it now.
+                // If we're dealing with a passive component that doesn't need to be explicitly triggered by the user,
+                // we'll call it now.
                 if (component.passive) {
                     mix[name]();
                 }
