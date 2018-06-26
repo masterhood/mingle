@@ -1,16 +1,11 @@
 let rally = require('ofcold-rally');
 
 /*
- |--------------------------------------------------------------------------
- | Rally Asset Management
- |--------------------------------------------------------------------------
- |
- | Rally provides a clean, fluent API for defining some Webpack build steps
- | for your Ofcold application. By default, we are compiling the Sass
- | file for your application, as well as bundling up your JS files.
- |
+ * Rally Asset Management
+ *
+ * Rally provides a clean, fluent API for defining some Webpack build steps for your Ofcold application. By default, we
+ * are compiling the Sass file for your application, as well as bundling up your JS files.
  */
-
 rally.js('src/app.js', 'dist/').sass('src/app.scss', 'dist/');
 
 // Full API

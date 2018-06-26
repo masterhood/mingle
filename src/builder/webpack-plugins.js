@@ -10,9 +10,8 @@ let UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 module.exports = function() {
     let plugins = [];
 
-    // If the user didn't declare any JS compilation, we still need to
-    // use a temporary script to force a compile. This plugin will
-    // handle the process of deleting the compiled script.
+    // If the user didn't declare any JS compilation, we still need to use a temporary script to force a compile. This
+    // plugin will handle the process of deleting the compiled script.
     if (!Rally.bundlingJavaScript) {
         plugins.push(new MockEntryPlugin());
     }
@@ -51,8 +50,8 @@ module.exports = function() {
         })
     );
 
-    // If we're in production environment, with Uglification turned on, we'll
-    // clean up and minify all of the user's JS and CSS automatically.
+    // If we're in production environment, with Uglification turned on, we'll clean up and minify all of the user's JS
+    // and CSS automatically.
     if (Rally.inProduction() && Config.uglify) {
         plugins.push(new UglifyJSPlugin(Config.uglify));
     }

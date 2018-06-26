@@ -1,7 +1,5 @@
 /**
- * This file represents an example component interface
- * for Rally. All new components can be "inserted" into
- * Rally, like so:
+ * This file represents an example component interface for Rally. All new components can be "inserted" into Rally, like so:
  *
  * // webpack.rally.js
  *
