@@ -11,8 +11,8 @@ module.exports = function() {
         plugins: [],
 
         stats: {
-            hash: false,
-            version: false,
+            hash: true,
+            version: true,
             timings: false,
             children: false,
             errorDetails: false,
