@@ -23,9 +23,7 @@ global.Rally = new (require('./Rally'))();
 /**
  * If we're working in a Ofcold app, we'll explicitly set the default public path, as a convenience.
  */
-if (Rally.sees('ofcold')) {
-    Config.publicPath = 'public';
-}
+Config.publicPath = 'public';
 
 /**
  * If the user activates hot reloading, with the --hot flag, we'll record it as a file, so that Ofcold can detect it and
