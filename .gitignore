@@ -5,3 +5,4 @@ coverage
 .idea/
 *.log
 .DS_Store
+package-lock.json
