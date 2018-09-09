@@ -1,6 +1,6 @@
 {
   "name": "ofcold-rally",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Ofcold Rally is an elegant package around Webpack's packaging.",
   "main": "src/index.js",
   "scripts": {
