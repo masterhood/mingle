@@ -56,7 +56,7 @@ class Rally {
      */
     sees(tool) {
         if (tool === 'ofcold') {
-            return File.exists('./artisan');
+            return File.exists('./art');
         }
 
         return false;
