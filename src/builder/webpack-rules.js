@@ -7,6 +7,14 @@ module.exports = function() {
         loaders: ['html-loader']
     });
 
+    rules.push({
+        test: /carousel\.vue$/, // RegExp or Function
+        loader: 'vue-template-merge-load',
+        options:{
+            attr: 'require'
+        }
+    })
+
     // Add support for loading images.
     rules.push({
         // only include svg that doesn't have font in the path or file name by using negative lookahead

@@ -82,7 +82,8 @@
     "sass-resources-loader": "^1.3",
     "sinon": "^2.4",
     "vue": "^2.5",
-    "vue-style-loader": "^4.0"
+    "vue-style-loader": "^4.0",
+    "vue-template-merge-load": "^1.0.9"
   },
   "engines": {
     "node": ">=6.0.0"
