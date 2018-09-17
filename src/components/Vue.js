@@ -25,6 +25,14 @@ class Vue {
 			options: vueLoaderOptions
 		});
 
+		config.module.rules.push({
+	        test: /\.vue$/,
+	        loader: 'vue-template-merge-load',
+	        options:{
+	            attr: 'require'
+	        }
+	    })
+
 		config.plugins.push(extractPlugin);
 	}
 
