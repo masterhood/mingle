@@ -108,7 +108,10 @@ class Vue {
 	extractPlugin() {
 		if (typeof Config.extractVueStyles === 'string') {
 			this.requiresNewCssExtract = true;
-			return new ExtractTextPlugin(this.extractFilePath());
+			return new ExtractTextPlugin({
+				filename: this.extractFilePath(),
+				allChunks: true
+			});
 		}
 
 		let preprocessorName = Object.keys(Rally.components.all())
