@@ -108,6 +108,7 @@ class Vue {
 	extractPlugin() {
 		if (typeof Config.extractVueStyles === 'string') {
 			this.requiresNewCssExtract = true;
+			console.log(this.extractFilePath());
 			return new ExtractTextPlugin({
 				filename: this.extractFilePath(),
 				allChunks: true
@@ -123,7 +124,10 @@ class Vue {
 			});
 
 		if (!preprocessorName) {
-			return new ExtractTextPlugin(this.extractFilePath());
+			return new ExtractTextPlugin({
+				filename: this.extractFilePath(),
+				allChunks: true
+			});
 		}
 
 		return Rally.components.get(preprocessorName).extractPlugins.slice(-1)[0];
