@@ -71,7 +71,7 @@
   "devDependencies": {
     "ava": "^0.25",
     "coffee-loader": "^0.9",
-    "coffeescript": "^2.2",
+    "coffeescript": "^2.3.2",
     "less": "^3.0",
     "less-loader": "^4.1",
     "mock-require": "^2.0",
