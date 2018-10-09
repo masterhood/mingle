@@ -124,10 +124,7 @@ class Vue {
 			});
 
 		if (!preprocessorName) {
-			return new ExtractTextPlugin({
-				filename: this.extractFilePath(),
-				allChunks: true
-			});
+			return new ExtractTextPlugin(this.extractFilePath());
 		}
 
 		return Rally.components.get(preprocessorName).extractPlugins.slice(-1)[0];
